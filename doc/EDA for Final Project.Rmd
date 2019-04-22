@@ -1,0 +1,8 @@
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+setwd('C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project')
+yrbss <- readr::read_csv('./data/Youth_Risk_Behavioral_Surveillance_System__YRBSS__Data.csv')
+
+```
+
