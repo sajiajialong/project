@@ -1,0 +1,7 @@
+"0","```r
+```r
+ggplot(data = questions_num) + 
+  geom_col(aes(x=Year, y=Number, fill=Type)) + 
+  scale_fill_manual(values = c(\gray75\, \gray45\))
+```
+```"

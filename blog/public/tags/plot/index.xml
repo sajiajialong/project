@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plot on A Hugo website</title>
+    <link>/tags/plot/</link>
+    <description>Recent content in plot on A Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/plot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Electronic Cigarette and Youth</title>
+      <link>/2019/04/30/electronic-cigarette-and-youth/</link>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/30/electronic-cigarette-and-youth/</guid>
+      <description>I. IntroductionII. Description of the data sourceWe mainly collect row data from Centers for Disease Control and Prevention and the link is: https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html.
+Data are available in SAS, Microsoft Access, and Microsoft Excel formats, as well as PDFs of the questionnaire, codebook, and methodology report.
+The data reveals the smoking and tobacco usage among youth and collected by doing survey called National Youth Tobacco Survey (NYTS).</description>
+    </item>
+    
+  </channel>
+</rss>
