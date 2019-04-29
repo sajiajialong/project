@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.4" />
+
+
+<title>Electronic Cigarette and Youth - A Hugo website</title>
+<meta property="og:title" content="Electronic Cigarette and Youth - A Hugo website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">6 min read</span>
+    
+
+    <h1 class="article-title">Electronic Cigarette and Youth</h1>
+
+    
+    <span class="article-date">2019-04-30</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+
+
+<div id="i.-introduction" class="section level1">
+<h1>I. Introduction</h1>
+</div>
+<div id="ii.-description-of-the-data-source" class="section level1">
+<h1>II. Description of the data source</h1>
+<p>We mainly collect row data from <code>Centers for Disease Control and Prevention</code> and the link is: <a href="https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html" class="uri">https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html</a>.</p>
+<p>Data are available in SAS, Microsoft Access, and Microsoft Excel formats, as well as PDFs of the questionnaire, codebook, and methodology report.</p>
+<p>The data reveals the smoking and tobacco usage among youth and collected by doing survey called <code>National Youth Tobacco Survey (NYTS)</code>. Data from 1999 and 2018 are available but we only choose those from 2011 to 2018 as the topics releated to electronic cigarette appear in these surveys as early as 2011. The data for a particular year, say 2018 looks like following:</p>
+<div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["4","4","4","2","1","4","3","4","4","2","4","4","4","3","4","4","2","1","2","4"],["2","2","2","2","2","1","2","1","2","2","2","2","2","2","2","2","2","1","2","2"],["01","01","01","01","01","06","01","02","01","01","01","01","01","01","01","01","01","07","01","01"],["1","1","1","1","1","2","1","1","1","1","1","1","1","1","1","1","1","2","1","1"],[1,1,1,1,1,7,1,8,1,1,1,1,1,1,1,1,1,4,1,1],["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Q6<\/th>\n      <th>Q7<\/th>\n      <th>Q8<\/th>\n      <th>Q9<\/th>\n      <th>Q10<\/th>\n      <th>Q11<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":5},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>Of course this is just a small part of the whole data. The 2019 NYTS data has 20189 observations and 373 variables. But actually the survey has only 88 questions and the reason for 373 rather than variables is that some questions contains several response and thus needing more columns to store and there are also many columns contains some statistical index calculated by <code>Centers for Disease Control and Prevention</code>. But all of those statistics are related to normal cigarettes and thus worth little to us.</p>
+<p>The biggest problem for us is that the questions is different from year to year and we need to go through every questions in each year and select the questions that:</p>
+<ol style="list-style-type: decimal">
+<li>related to electronic cigarettes,</li>
+<li>appear at least four years,</li>
+<li>high quality and can reveal some “truth”.</li>
+</ol>
+<p>We divided all the questions related to e-cigarettes into indirectly related and directly related based on whether the words such as “e-cigaretted”, “vape”, etc appears in questions or just appears as an options/selections.</p>
+<p>It is quite clear that the number of leaps from 2013 to 2014 and goes to peak in 2016. It’s may worth to mention that all survey questionnaire of 2017 and 2018 are the same.</p>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>All the questions selected are post in another blog called <code>All National Youth Tobacco Survey Questions Related to Electronic Cigarette</code>.</p>
+</div>
+<div id="iii.-description-of-data-import-cleaning-transformation" class="section level1">
+<h1>III. Description of data import / cleaning / transformation</h1>
+<p>The criteria say we can not show codes but indeed for this part it is more efficient to explain combined with codes. Anyway, the data were download in csv file and imported with <code>readr::read_csv()</code> soomthly. Some <code>NA</code> is filtered and some questions with multiple responses stored in several in columns are combined together. Some responses are low quality and useless, for example some students may choose “I have never used e-cigarettes” and “I used e-cigarettes in last 30 days” at the same time.</p>
+</div>
+<div id="iv.-analysis-of-missing-values" class="section level1">
+<h1>IV. Analysis of missing values</h1>
+<p>Describe any patterns you discover in missing values.</p>
+</div>
+<div id="v.-results" class="section level1">
+<h1>V. Results</h1>
+<div id="trends-and-patterns-of-the-usage-of-e-cigarettes" class="section level2">
+<h2>Trends and Patterns of the Usage of E-cigarettes</h2>
+<div id="age" class="section level3">
+<h3>Age</h3>
+<p>boxplot</p>
+</div>
+<div id="days" class="section level3">
+<h3>Days</h3>
+<p>ridge</p>
+</div>
+<div id="sex" class="section level3">
+<h3>Sex</h3>
+<p>lines</p>
+</div>
+</div>
+<div id="analysis" class="section level2">
+<h2>Analysis</h2>
+<div id="attitudes-of-e-cigarettes" class="section level3">
+<h3>Attitudes of E-cigarettes</h3>
+<p>We combined the following five questions together:</p>
+<p>Q27. Have you ever been curious about using an e-cigarette?</p>
+<p>The reponse of the questions are shown by the color in lengend <code>Type</code>, The red lines indicates the response of those who are curious about e-cigarettes and the blue/green lines shows those of not curious.</p>
+<p>Q35. Do you think that you will try an e-cigarette soon?</p>
+<p>Q36. Do you think you will use an e-cigarette in the next year?</p>
+<p>Q37. If one of your best friends were to offer you an e-cigarette, would you use it?</p>
+<p>Q3. What grade are you in?</p>
+<p>Due to the limitation of <code>GGally::ggparcoord()</code>, only 2000 response can plot at one time. Therefore we sampled 2000 response randomly and the following patterns/findings are nearly repeats every times.</p>
+<pre class="r"><code>NYTS_2018_Selected %&gt;% 
+  filter(Q28 == 2) %&gt;% 
+  select(&#39;Q27&#39;,&#39;Q35&#39;,&#39;Q36&#39;,&#39;Q37&#39;,&#39;Q3&#39;) %&gt;% 
+  mutate(Type = ifelse(Q27&lt;=2, &quot;Curious&quot;,&quot;Not Curious&quot;)) %&gt;%
+  mutate(Q3 = readr::parse_integer(Q3)-1.5) %&gt;%
+  sample_n(2000) %&gt;%
+  ggparcoord(columns = 2:5, scale = &quot;globalminmax&quot;, splineFactor = 10, alphaLines = 0.5, groupColumn = 6) +
+  scale_y_discrete(limits=c(&quot;Definitely yes&quot;,&quot;Probably yes&quot;,&quot;Probably not&quot;,&quot;Definitely not&quot;)) +
+  labs(x=&quot;Questions&quot;,y=&quot;Responses&quot;)</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The most obvious pattern are whether youth are curious about the e-cigarettes almost determines whether they will try e-cigarettes.</p>
+<p>If we exam the pictures more carefully, we can see the effects of friends. The lines accross <code>Probably yes</code> and <code>Definitely yes</code> from <code>Q37</code> are denser than those from <code>Q35</code> and <code>Q36</code>. This indicates a little bit of the reasons of why youth use e-cigarettes. If you can not see clearly due to the bad representation of the samples, never mind, we will study this more throughtly in the following parts.</p>
+</div>
+<div id="what-are-the-reasons-youths-have-used-ecigarettes-select-one-or-more" class="section level3">
+<h3>What are the reasons youths have used ecigarettes? (Select one or more)</h3>
+<p>A. I have never tried an e-cigarette</p>
+<p>B. Friend or family member used them</p>
+<p>C. To try to quit using other tobacco products, such as cigarettes</p>
+<p>D. They cost less than other tobacco products, such as cigarettes</p>
+<p>E. They are easier to get than other tobacco products, such as cigarettes</p>
+<p>F. Famous people on TV or in movies use them</p>
+<p>G. They are less harmful than other forms of tobacco, such as cigarettes</p>
+<p>H. They are available in flavors, such as mint, candy, fruit, or chocolate</p>
+<p>I. They can be used in areas where other tobacco products, such as cigarettes, are not allowed</p>
+<p>J. I used them for some other reason</p>
+<p>As indicateds in the subtitles, this is a questions with several responses. Generally, this kind of data are very difficult to visualize. We will exam these data step by step.</p>
+<p>First, we clean the data a little bit and create a new columns called <code>Q33</code> showing the response in a human reading way. And the filter <code>Q33A</code> as we only care about those have tried e-cigarettes.</p>
+<pre class="r"><code>Reasons &lt;- NYTS_2018_Selected %&gt;% filter(is.na(Q33A)) %&gt;% select(matches(&quot;Q(1|2|3)$&quot;), contains(&#39;Q33&#39;))
+Reasons[19:25,5:14]</code></pre>
+<pre><code>## # A tibble: 7 x 10
+##   Q33B  Q33C  Q33D  Q33E  Q33F  Q33G  Q33H  Q33I  Q33J  Q33  
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 B     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  B    
+## 2 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  G     H     &lt;NA&gt;  J     GHJ  
+## 3 B     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  H     &lt;NA&gt;  &lt;NA&gt;  BH   
+## 4 B     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  B    
+## 5 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  G     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  G    
+## 6 &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  J     J    
+## 7 B     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  B</code></pre>
+<p>You know what? There are totally 159 different combination appears! But mathematically speaking, there could be 512 different choice at most. So, definitely, there are some patterns behind.</p>
+<p>In the following plot, we only count the frequency of each choice without considering the combination. It if quite clear that choice B: Friend or family member used them is the major reasons for youth to try e-cigarettes. And the second is e-cigarettes are available in flavors, such as mint, candy, fruit, or chocolate. And then they are less harmful than other forms of tobacco, such as cigarettes if we do not consider other reasons, i.e. choice J. Health is not the major reason for youth to choice e-cigarettes!! And if only counts less than half of influence of friends and familys!!</p>
+<pre class="r"><code>NYTS_2018_Full %&gt;% select(contains(&#39;Q33&#39;)) %&gt;% 
+  select(-Q33A) %&gt;% as.matrix() %&gt;% colSums(.,na.rm = T) %&gt;% 
+  tibble(Choice = c(&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;I&quot;,&quot;J&quot;), Count = .) %&gt;%
+  ggplot() + 
+  geom_col(aes(x=Choice, y=Count))</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>Reasons %&gt;% count(Q33) %&gt;% filter(n&gt;=10) %&gt;% arrange(desc(n)) %&gt;% 
+  filter(n!=75) %&gt;% mutate(Related_to_B = ifelse(stringr::str_detect(Q33, &quot;B&quot;), &#39;Yes&#39;, &#39;No&#39;)) %&gt;%
+  mutate(Q33 = forcats::fct_reorder(Q33, n, .desc=FALSE)) %&gt;%
+  mutate(Count = n) %&gt;%
+  ggplot() + 
+  geom_col(aes(x = Q33, y=Count, fill=Related_to_B)) +
+  coord_flip()</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

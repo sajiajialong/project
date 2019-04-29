@@ -1,0 +1,71 @@
+---
+title: "Attitude of Youth towards E-cigarettes"
+author: Shengjie Sun
+output: html_notebook
+---
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(GGally)
+setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
+
+questions_num <- readr::read_csv("./output/attitude/Number of Questions.csv")
+questions_num$Type <- factor(questions_num$Type, levels = c("Indirectly Related", "Directly Related"))
+
+NYTS_2018_full <- readr::read_csv("./data/2018-NYTS/nyts2018.csv") %>% select(matches("Q(1|2|3|5)[A-Z]?$"),  contains('Q33'), 'Q27', 'Q35', 'Q68', 'Q69', 'Q28','Q29','Q30','Q31','Q34','Q36','Q37') %>%
+  mutate(Q33A = ifelse(Q33A==1, "A", Q33A)) %>% mutate(Q33B = ifelse(Q33B==1, "B", Q33B)) %>%
+  mutate(Q33C = ifelse(Q33C==1, "C", Q33C)) %>% mutate(Q33D = ifelse(Q33D==1, "D", Q33D)) %>%
+  mutate(Q33E = ifelse(Q33E==1, "E", Q33E)) %>% mutate(Q33F = ifelse(Q33F==1, "F", Q33F)) %>%
+  mutate(Q33G = ifelse(Q33G==1, "G", Q33G)) %>% mutate(Q33H = ifelse(Q33H==1, "H", Q33H)) %>%
+  mutate(Q33I = ifelse(Q33I==1, "I", Q33I)) %>% mutate(Q33J = ifelse(Q33J==1, "J", Q33J)) %>%
+  #mutate(Q33Fake = coalesce(Q33A,Q33B,Q33C,Q33D,Q33E,Q33F,Q33G,Q33H,Q33I,Q33J)) %>%
+  mutate(Q33 = stringr::str_replace_all(paste(Q33A,Q33B,Q33C,Q33D,Q33E,Q33F,Q33G,Q33H,Q33I,Q33J, sep = ""),"NA","")) %>%
+  mutate(Q5A = ifelse(Q5A==1, "A", Q5A)) %>% mutate(Q5B = ifelse(Q5B==1, "B", Q5B)) %>%
+  mutate(Q5C = ifelse(Q5C==1, "C", Q5C)) %>% mutate(Q5D = ifelse(Q5D==1, "D", Q5D)) %>%
+  mutate(Q5E = ifelse(Q5E==1, "E", Q5E)) %>% 
+  select(matches("Q(1|2|3)$"), 'Q27','Q28','Q29','Q30','Q31','Q34','Q35','Q36','Q37','Q68','Q69', contains('Q33')) %>%
+  filter(Q2!='*') %>% filter(Q3!='*') %>% filter(Q34!='*') %>% filter(Q27!='*') %>% 
+  filter(Q35!='*') %>% filter(Q68!='*') %>% filter(Q69!='*') %>% filter(Q37!='*') %>% 
+  filter(Q29!='**') %>% filter(Q1!='**')
+```
+
+## Number of Questions
+```{r}
+ggplot(data = questions_num) + 
+  geom_col(aes(x=Year, y=Number, fill=Type)) + 
+  scale_fill_manual(values = c("gray75", "gray45"))
+```
+
+## Curiousity and trying e-cigarette
+Q3. What grade are you in?
+Q27. Have you ever been curious about using an e-cigarette?
+Q35. Do you think that you will try an e-cigarette soon?
+Q36. Do you think you will use an e-cigarette in the next year?
+Q37. If one of your best friends were to offer you an e-cigarette, would you use it?
+```{r}
+NYTS_2018_full %>% 
+  filter(Q28 == 2) %>%
+  select('Q27','Q3', 'Q35','Q36','Q37') %>% 
+  mutate(Type = ifelse(Q27<=2, "Curious","Not Curious")) %>%
+  mutate(Q3 = readr::parse_integer(Q3)-1.5) %>%
+  sample_n(2000) %>%
+  ggparcoord(columns = 2:5, scale = "globalminmax", splineFactor = 10, alphaLines = 0.5, groupColumn = 6) 
+```
+
+## 33. What are the reasons you have used ecigarettes? (Select one or more)
+A. I have never tried an e-cigarette
+### B. Friend or family member used them
+C. To try to quit using other tobacco products, such as cigarettes
+D. They cost less than other tobacco products, such as cigarettes
+E. They are easier to get than other tobacco products, such as cigarettes
+F. Famous people on TV or in movies use them
+### G. They are less harmful than other forms of tobacco, such as cigarettes
+### H. They are available in flavors, such as mint, candy, fruit, or chocolate
+I. They can be used in areas where other tobacco products, such as cigarettes, are not allowed
+### J. I used them for some other reason
+```{r}
+Reasons <- NYTS_2018_full %>% filter(is.na(Q33A)) %>% select(matches("Q(1|2|3)$"), contains('Q33'))
+Reasons %>% count(Q33) %>% filter(n>=10) %>% arrange(desc(n)) %>% filter(n!=75)
+```
+

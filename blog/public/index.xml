@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>A Hugo website</title>
+    <link>/</link>
+    <description>Recent content on A Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Electronic Cigarette and Youth</title>
+      <link>/2019/04/30/electronic-cigarette-and-youth/</link>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/30/electronic-cigarette-and-youth/</guid>
+      <description>I. IntroductionII. Description of the data sourceWe mainly collect row data from Centers for Disease Control and Prevention and the link is: https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html.
+Data are available in SAS, Microsoft Access, and Microsoft Excel formats, as well as PDFs of the questionnaire, codebook, and methodology report.
+The data reveals the smoking and tobacco usage among youth and collected by doing survey called National Youth Tobacco Survey (NYTS).</description>
+    </item>
+    
+    <item>
+      <title>All National Youth Tobacco Survey Questions Related to Electronic Cigarette</title>
+      <link>/2019/04/20/fsfasfdag/</link>
+      <pubDate>Sat, 20 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/20/fsfasfdag/</guid>
+      <description>National Youth Tobacco Survey 2018 Questionnaire (21)  The next 11 questions are about electronic cigarettes or e-cigarettes. E-cigarettes are battery powered devices that usually contain a nicotine-based liquid that is vaporized and inhaled. You may also know them as e-cigs, vape-pens, hookah-pens, e-hookahs, e-cigars, e-pipes, personal vaporizers, or mods. Some brand examples include NJOY, Blu, Vuse, MarkTen, Logic, Vapin Plus, eGo, and Halo.   Have you ever been curious about using an e-cigarette?</description>
+    </item>
+    
+    <item>
+      <title>A Plain Markdown Post</title>
+      <link>/2016/12/30/a-plain-markdown-post/</link>
+      <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
+      
+      <guid>/2016/12/30/a-plain-markdown-post/</guid>
+      <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
+ You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/about/</guid>
+      <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+    </item>
+    
+    <item>
+      <title>Lorem Ipsum</title>
+      <link>/2015/01/01/lorem-ipsum/</link>
+      <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
+      
+      <guid>/2015/01/01/lorem-ipsum/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+  </channel>
+</rss>
