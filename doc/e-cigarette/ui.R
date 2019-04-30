@@ -8,16 +8,17 @@
 #
 
 library(shiny)
-
-# Define UI for random distribution application 
+                    
+# Define UI for random distribution application
 shinyUI(pageWithSidebar(
-    
+
     # Application title
     headerPanel("Why have you used ecigarettes?"),
-    
+
     # Sidebar with controls to select the random distribution type
     # and number of observations to generate. Note the use of the br()
     # element to introduce extra vertical spacing
+
     sidebarPanel(
         checkboxGroupInput(inputId="reasons", label="Select one or more",
                            c("Friend or family member used them" = "Q33B",
@@ -30,15 +31,16 @@ shinyUI(pageWithSidebar(
                           "They can be used in areas where other tobacco products, such as cigarettes, are not allowed" = "Q33I",
                           "I used them for some other reason" = "Q33J"))
     ),
-    
-    
+
+
     # Show a tabset that includes a plot, summary, and table view
     # of the generated distribution
     mainPanel(
-        tabsetPanel(
-            tabPanel("Plot", plotOutput("histogram")), 
-            tabPanel("Summary", verbatimTextOutput("summary")), 
-            tabPanel("Table", tableOutput("table"))
-        )
+        # tabsetPanel(
+        #     tabPanel("Plot", plotOutput("histogram")),
+        #     tabPanel("Summary", verbatimTextOutput("summary")),
+        #     tabPanel("Table", tableOutput("table"))
+        # )
+        plotOutput("histogram")
     )
 ))

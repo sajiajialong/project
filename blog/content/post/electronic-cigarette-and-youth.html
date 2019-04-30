@@ -19,6 +19,19 @@ tags: ["R Markdown", "plot", "regression"]
 
 <div id="i.-introduction" class="section level1">
 <h1>I. Introduction</h1>
+<div id="e-cigarette-basics" class="section level2">
+<h2>E-cigarette Basics</h2>
+<p>E-cigarettes are devices that heat a liquid into an aerosol that the user inhales. The liquid usually has nicotine and flavoring in it, and other additives. E-cigarettes are considered tobacco products because most of them contain nicotine, which comes from tobacco. Also known as e-cigarettes, e-cigs, electronic nicotine delivery systems, vaporizer cigarettes, and vape pens, they are marketed as a way to stop or cut down on smoking. It aims to provide a similar sensation to inhaling tobacco smoke, without the smoke.</p>
+</div>
+<div id="e-cigarette-and-youth" class="section level2">
+<h2>E-cigarette and Youth</h2>
+<p>E-cigarettes are very popular with young people. Their use has grown dramatically in the last eight years. Today, more high school students use e-cigarettes than regular cigarettes. The use of e-cigarettes is higher among high school students than adults according to National Youth Tobacco Survey.</p>
+</div>
+<div id="goal-of-this-blog" class="section level2">
+<h2>Goal of This Blog</h2>
+<p>There are lots of voice that e-cigarettes are harmful to youth and they also report that e-cigarettes are more and more popular among youth. In this blog, we will not argue that whether or not the e-cigarette is a good thing as it may help reduce the usage of traditional cigarettes, reported by some articles, while the traditional cigarettes are far more harmful than electronic ones.</p>
+<p>In this blog, we will focus on the true distribution of the usage of e-cigarettes among youth. And pay greate attention on the reason of choosing e-cigarettes. By doing this, we found that prohibiting e-cigarettes by telling them e-cigarettes are harmful is not effective!</p>
+</div>
 </div>
 <div id="ii.-description-of-the-data-source" class="section level1">
 <h1>II. Description of the data source</h1>
@@ -52,17 +65,37 @@ tags: ["R Markdown", "plot", "regression"]
 <h1>V. Results</h1>
 <div id="trends-and-patterns-of-the-usage-of-e-cigarettes" class="section level2">
 <h2>Trends and Patterns of the Usage of E-cigarettes</h2>
+</div>
+<div id="lalalalala" class="section level2">
+<h2>lalalalala</h2>
+<p>One thing we are interested in is how likely people become “addictive” after they try e-cigarettes once or twice and become regular smokers. We define “addictive” and “regular smokers” as thoses who spend more than two days to smoke e-cigarettes within 30 days. This question is addressed in two steps:
+1) what is the percentage of regular smokers in the whole population?
+2) what is the percentage of regular smokers among those who tried to smoke once or twice?
+And in order to give our readers a direct impression about the extent of addction, we compare with the data of ordinary cigarettes. The results are shown in the following several figures.
+<img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The lines in the figure answers the first question, showing above shows that there about 4.5% to 9% regular e-cigarettes users in the youth, compared to 3% to 4% regular cigarettes smakers in the youth. This result is probably contradictary to our commen sense: there are more cigarettes smokers around us than e-cigarettes smakers. Our commen sense may be true for adults, however, it is a different story in youth group. E-cigarettes are more popular in youth group.</p>
+<p>Another thing that worths to notices is that the percentage of regular e-cigarettes smokers is generally increases while the percentage of cigarettes is generally decreasing, suggesting e-cigarettes are becoming a trend among youth.</p>
+<p>In addition to the investigations in the whole youth population, gender is also considered as an important factor: we would like to find out whether there is a huge difference between different genders with respect to smoking. Here is the result:</p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>It seems that males are more “fashionable” in regards to smoking. There is higher female precentage in traditional smoking, than in the new-born e-cigarettes smoking.</p>
+<p>To answer the second question, we plot the percentage of regular smokers among those who tried to smoke once or twice. Ther higher the percentage is, the more likely people sink into it.</p>
 <div id="age" class="section level3">
 <h3>Age</h3>
-<p>boxplot</p>
+<p>As previously shown, e-cigarettes seem to become more and more popular among young people. Not only is it reflected in the percentage of regular smokers, but also reflected in the age when people try e-cigarettes for the first time.
+<img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+The figure above shows that the age when the youth try their first taste of e-cigarettes becomes younger. In the investigation in 2014, it happened at the age of 15. Now in 2018, it happens at the age of 14.</p>
 </div>
 <div id="days" class="section level3">
 <h3>Days</h3>
-<p>ridge</p>
+<p>One one hand, we see the popularity of e-cigarettes among youth. On the other hand, the days people spend to use e-cigarettes is increasing. We suspect it is partially due to the popularity of e-cigarettes. One possibility is that when people realize e-cigarette is a fishionable thing, they may have less motive to restrain themselves from it. Another reason we can think of is that people with more years of smoking experience tend to smoke more often. E-cigarettes is a new thing, so the percentage of many-years smoker is still increasing.</p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+The figure above shows that in 2014, the average days people spend in smoke was 9 days. Afterwards it gradually increases to 14 days in 2018.</p>
 </div>
-<div id="sex" class="section level3">
-<h3>Sex</h3>
-<p>lines</p>
+<div id="advertisement" class="section level3">
+<h3>Advertisement</h3>
+<p>The questionair includs questions about advertisement in four kinds of media: internet, newspaper, supermarkets, TV. It asks how often do youth see advertisement of e-cigarette in those media. Five options are given: never, rarely, sometimes, most of the time, always.</p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>From the figure above, we are able to conclude that less advertisements are put in newspaper. Relatively more ads are put in internet, supermarket and TV. It is possibly because less and less people read newspapers. It looks like it is more often to see advertisement of e-cigarettes in supermarket. Though youth may show up on the internet more often, supermarket is the main battleground for e-cigarette to win custumers. One explaination is that people with purchasing power are more likely to go to supermarket, and manufacturer wants to win over those potential clinets.</p>
 </div>
 </div>
 <div id="analysis" class="section level2">
@@ -77,7 +110,7 @@ tags: ["R Markdown", "plot", "regression"]
 <p>Q37. If one of your best friends were to offer you an e-cigarette, would you use it?</p>
 <p>Q3. What grade are you in?</p>
 <p>Due to the limitation of <code>GGally::ggparcoord()</code>, only 2000 response can plot at one time. Therefore we sampled 2000 response randomly and the following patterns/findings are nearly repeats every times.</p>
-<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>The most obvious pattern are whether youth are curious about the e-cigarettes almost determines whether they will try e-cigarettes.</p>
 <p>If we exam the pictures more carefully, we can see the effects of friends. The lines accross <code>Probably yes</code> and <code>Definitely yes</code> from <code>Q37</code> are denser than those from <code>Q35</code> and <code>Q36</code>. This indicates a little bit of the reasons of why youth use e-cigarettes. If you can not see clearly due to the bad representation of the samples, never mind, we will study this more throughtly in the following parts.</p>
 </div>
@@ -107,41 +140,12 @@ tags: ["R Markdown", "plot", "regression"]
 ## 7 B     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  B</code></pre>
 <p>You know what? There are totally 159 different combination appears! But mathematically speaking, there could be 512 different choice at most. So, definitely, there are some patterns behind.</p>
 <p>In the following plot, we only count the frequency of each choice without considering the combination. It if quite clear that choice B: Friend or family member used them is the major reasons for youth to try e-cigarettes. And the second is e-cigarettes are available in flavors, such as mint, candy, fruit, or chocolate. And then they are less harmful than other forms of tobacco, such as cigarettes if we do not consider other reasons, i.e. choice J. Health is not the major reason for youth to choice e-cigarettes!! And if only counts less than half of influence of friends and familys!!</p>
-<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>One thing we are interested in is how likely people become “addictive” after they try e-cigarettes once or twice and become regular smokers. We define “addictive” and “regular smokers” as thoses who spend more than two days to smoke e-cigarettes within 30 days. This question is addressed in two steps:
-1) what is the percentage of regular smokers in the whole population?
-2) what is the percentage of regular smokers among those who tried to smoke once or twice?
-And in order to give our readers a direct impression about the extent of addction, we compare with the data of ordinary cigarettes. The results are shown in the following several figures.
-<img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>The lines in the figure answers the first question, showing above shows that there about 4.5% to 9% regular e-cigarettes users in the youth, compared to 3% to 4% regular cigarettes smakers in the youth. This result is probably contradictary to our commen sense: there are more cigarettes smokers around us than e-cigarettes smakers. Our commen sense may be true for adults, however, it is a different story in youth group. E-cigarettes are more popular in youth group.</p>
-<p>Another thing that worths to notices is that the percentage of regular e-cigarettes smokers is generally increases while the percentage of cigarettes is generally decreasing, suggesting e-cigarettes are becoming a trend among youth.</p>
-<p>In addition to the investigations in the whole youth population, gender is also considered as an important factor: we would like to find out whether there is a huge difference between different genders with respect to smoking. Here is the result:</p>
-<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>It seems that males are more “fashionable” in regards to smoking. There is higher female precentage in traditional smoking, than in the new-born e-cigarettes smoking.</p>
-<p>To answer the second question, we plot the percentage of regular smokers among those who tried to smoke once or twice. Ther higher the percentage is, the more likely people sink into it.</p>
-<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>The figure above shows that 25% of those who are willing to try e-cigarettes turn out to be regular smokers. Tha explaination for this can be multiple: it is possible that in the beginning 1/4 of the triers are determined to be regular smokers. Or it is possible that e-cigarettes can attract 1/4 of the triers. Gender also plays a role in the process. Female are less likely to turn into a regular e-cigarette smoker than males.</p>
-<div id="section" class="section level19">
-<p></p>
-<p>As previously shown, e-cigarettes seem to become more and more popular among young people. Not only is it reflected in the percentage of regular smokers, but also reflected in the age when people try e-cigarettes for the first time.</p>
-<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-The figure above shows that the age when the youth try their first taste of e-cigarettes becomes younger. In the investigation in 2014, it happened at the age of 15. Now in 2018, it happens at the age of 14.</p>
-</div>
-<div id="section-1" class="section level18">
-<p></p>
-<p>One one hand, we see the popularity of e-cigarettes among youth. On the other hand, the days people spend to use e-cigarettes is increasing. We suspect it is partially due to the popularity of e-cigarettes. One possibility is that when people realize e-cigarette is a fishionable thing, they may have less motive to restrain themselves from it. Another reason we can think of is that people with more years of smoking experience tend to smoke more often. E-cigarettes is a new thing, so the percentage of many-years smoker is still increasing.</p>
-<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-The figure above shows that in 2014, the average days people spend in smoke was 9 days. Afterwards it gradually increases to 14 days in 2018.</p>
-</div>
-<div id="section-2" class="section level13">
-<p></p>
-<p>The questionair includs questions about advertisement in four kinds of media: internet, newspaper, supermarkets, TV. It asks how often do youth see advertisement of e-cigarette in those media. Five options are given: never, rarely, sometimes, most of the time, always.</p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>From the figure above, we are able to conclude that less advertisements are put in newspaper. Relatively more ads are put in internet, supermarket and TV. It is possibly because less and less people read newspapers. It looks like it is more often to see advertisement of e-cigarettes in supermarket. Though youth may show up on the internet more often, supermarket is the main battleground for e-cigarette to win custumers. One explaination is that people with purchasing power are more likely to go to supermarket, and manufacturer wants to win over those potential clinets.</p>
+<p>The figure above shows that 25% of those who are willing to try e-cigarettes turn out to be regular smokers. Tha explaination for this can be multiple: it is possible that in the beginning 1/4 of the triers are determined to be regular smokers. Or it is possible that e-cigarettes can attract 1/4 of the triers. Gender also plays a role in the process. Female are less likely to turn into a regular e-cigarette smoker than males.</p>
 <iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width="1000" height="800&quot;">
 </iframe>
-</div>
 </div>
 </div>
 </div>
