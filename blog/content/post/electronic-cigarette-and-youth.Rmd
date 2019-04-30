@@ -49,7 +49,7 @@ DT::datatable(NYTS_2018_Full[1:20,15:20])
 
 Of course this is just a small part of the whole data. The 2019 NYTS data has 20189 observations and 373 variables. But actually the survey has only 88 questions and the reason for 373 rather than variables is that some questions contains several response and thus needing more columns to store and there are also many columns contains some statistical index calculated by `Centers for Disease Control and Prevention`. But all of those statistics are related to normal cigarettes and thus worth little to us.
 
-The biggest problem for us is that the questions is different from year to year and we need to go through every questions in each year and select the questions that:
+The biggest problem for us is that the questionnaire are different from year to year and we need to go through every questions in each year and select the questions that:
 
 1. related to electronic cigarettes,
 2. appear at least four years,
@@ -60,15 +60,18 @@ We divided all the questions related to e-cigarettes into indirectly related and
 It is quite clear that the number of leaps from 2013 to 2014 and goes to peak in 2016. It's may worth to mention that all survey questionnaire of 2017 and 2018 are the same.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-ggplot(data = questions_num) + 
+questions_num %>% mutate(Year = factor(Year)) %>%
+  ggplot() + 
   geom_col(aes(x=Year, y=Number, fill=Type)) + 
   scale_fill_manual(values = c("gray75", "gray45"))
 ```
 
-All the questions selected are post in another blog called `All National Youth Tobacco Survey Questions Related to Electronic Cigarette`.
+Before 2011, there is no question related to e-cigarettes/vapes, and during 2011, 2012 and 2013, e-cigarettes and vapes are just mentioned within questions. From 2014 to 2016, great attention was paid while the questions varies. Starting from 2017, the questions related to e-cigarettes keep same. 
+
+All the questions selected are post in another blog called `All National Youth Tobacco Survey Questions Related to Electronic Cigarette` feel free to check it.
 
 # III. Description of data import / cleaning / transformation
-The criteria say we can not show codes but indeed for this part it is more efficient to explain combined with codes. Anyway, the data were download in csv file and imported with `readr::read_csv()` soomthly. Some `NA` is filtered and some questions with multiple responses stored in several in columns are combined together. Some responses are low quality and useless, for example some students may choose "I have never used e-cigarettes" and "I used e-cigarettes in last 30 days" at the same time. 
+The criteria/requirments say we can not include codes in this blog, but indeed for this part it is more efficient to explain combined with codes. Anyway, the data were download in csv file and imported with `readr::read_csv()` soomthly. Some `NA` is filtered and some questions with multiple responses stored in several in columns are combined together. Some responses are low quality and useless, for example some students may choose "I have never used e-cigarettes" and "I used e-cigarettes in last 30 days" at the same time. If you want to check the codes, we also posted them in the third blog, feel free to check that!.
 
 # IV. Analysis of missing values
 Describe any patterns you discover in missing values.
@@ -105,7 +108,7 @@ Q3. What grade are you in?
 
 Due to the limitation of `GGally::ggparcoord()`, only 2000 response can plot at one time. Therefore we sampled 2000 response randomly and the following patterns/findings are nearly repeats every times. 
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 NYTS_2018_Selected %>% 
   filter(Q28 == 2) %>% 
   select('Q27','Q35','Q36','Q37','Q3') %>% 
@@ -146,7 +149,7 @@ J. I used them for some other reason
 As indicateds in the subtitles, this is a questions with several responses. Generally, this kind of data are very difficult to visualize. We will exam these data step by step.
 
 First, we clean the data a little bit and create a new columns called `Q33` showing the response in a human reading way. And the filter `Q33A` as we only care about those have tried e-cigarettes. 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 Reasons <- NYTS_2018_Selected %>% filter(is.na(Q33A)) %>% select(matches("Q(1|2|3)$"), contains('Q33'))
 Reasons[19:25,5:14]
 ```
@@ -154,7 +157,7 @@ You know what? There are totally 159 different combination appears! But mathemat
 
 In the following plot, we only count the frequency of each choice without considering the combination. It if quite clear that choice B: Friend or family member used them is the major reasons for youth to try e-cigarettes. And the second is e-cigarettes are available in flavors, such as mint, candy, fruit, or chocolate. And then they are less harmful than other forms of tobacco, such as cigarettes if we do not consider other reasons, i.e. choice J. Health is not the major reason for youth to choice e-cigarettes!! And if only counts less than half of influence of friends and familys!!
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 NYTS_2018_Full %>% select(contains('Q33')) %>% 
   select(-Q33A) %>% as.matrix() %>% colSums(.,na.rm = T) %>% 
   tibble(Choice = c("B","C","D","E","F","G","H","I","J"), Count = .) %>%
@@ -162,7 +165,7 @@ NYTS_2018_Full %>% select(contains('Q33')) %>%
   geom_col(aes(x=Choice, y=Count))
 ```
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 Reasons %>% count(Q33) %>% filter(n>=10) %>% arrange(desc(n)) %>%
   filter(n!=75) %>% mutate(Related_to_B = ifelse(stringr::str_detect(Q33, "B"), 'Yes', 'No')) %>%
   mutate(Q33 = forcats::fct_reorder(Q33, n, .desc=FALSE)) %>%
@@ -176,7 +179,7 @@ One thing we are interested in is how likely people become "addictive" after the
 1) what is the percentage of regular smokers in the whole population?
 2) what is the percentage of regular smokers among those who tried to smoke once or twice?
 And in order to give our readers a direct impression about the extent of addction, we compare with the data of ordinary cigarettes. The results are shown in the following several figures.
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot()+
   geom_line(aes(x=2014:2018,y=regular_per[1,],color="e-cigarette"),size=1.5)+
   geom_line(aes(x=2014:2018,y=regular_per[2,],color="cigarette"),size=1.5)+
@@ -190,7 +193,7 @@ Another thing that worths to notices is that the percentage of regular e-cigaret
 
 In addition to the investigations in the whole youth population, gender is also considered as an important factor: we would like to find out whether there is a huge difference between different genders with respect to smoking. Here is the result:
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot()+ 
   geom_line(aes(x=2014:2018,y=ratio[1,],color="e-cigarette"))+
   geom_line(aes(x=2014:2018,y=ratio[2,],color="cigarette"))+
@@ -202,7 +205,7 @@ It seems that males are more "fashionable" in regards to smoking. There is highe
 
 To answer the second question, we plot the percentage of regular smokers among those who tried to smoke once or twice. Ther higher the percentage is, the more likely people sink into it.
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot()+
   geom_line(aes(x=2014:2018,y=addiction.rate.male,color="male"))+
   geom_line(aes(x=2014:2018,y=addiction.rate,color="overall"),size=1)+
@@ -219,7 +222,7 @@ The figure above shows that 25% of those who are willing to try e-cigarettes tur
 As previously shown, e-cigarettes seem to become more and more popular among young people. Not only is it reflected in the percentage of regular smokers, but also reflected in the age when people try e-cigarettes for the first time. 
 
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 age_first1 %>% 
   mutate(year = factor(year)) %>%
   ggplot()+
@@ -234,7 +237,7 @@ The figure above shows that the age when the youth try their first taste of e-ci
 
 One one hand, we see the popularity of e-cigarettes among youth. On the other hand, the days people spend to use e-cigarettes is increasing. We suspect it is partially due to the popularity of e-cigarettes. One possibility is that when people realize e-cigarette is a fishionable thing, they may have less motive to restrain themselves from it. Another reason we can think of is that people with more years of smoking experience tend to smoke more often. E-cigarettes is a new thing, so the percentage of many-years smoker is still increasing.
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(data = regular[regular$key=="e"&regular$days>0,])+
   geom_boxplot(aes(y=days,x=as.factor(year),fill=as.factor(year)))+
   xlab("year")+ylab("days of smoking within one month")+
@@ -245,7 +248,7 @@ The figure above shows that in 2014, the average days people spend in smoke was 
 #############
 The questionair includs questions about advertisement in four kinds of media: internet, newspaper, supermarkets, TV. It asks how often do youth see advertisement of e-cigarette in those media. Five options are given: never, rarely, sometimes, most of the time, always.
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 index<-complete.cases(adv)
 adv<- adv[adv$fre>1 & index,]
 adv$fre<- as.factor(adv$fre)
