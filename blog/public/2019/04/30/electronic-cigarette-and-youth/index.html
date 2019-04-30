@@ -103,7 +103,7 @@
 </ol>
 <p>We divided all the questions related to e-cigarettes into indirectly related and directly related based on whether the words such as “e-cigaretted”, “vape”, etc appears in questions or just appears as an options/selections.</p>
 <p>It is quite clear that the number of leaps from 2013 to 2014 and goes to peak in 2016. It’s may worth to mention that all survey questionnaire of 2017 and 2018 are the same.</p>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>All the questions selected are post in another blog called <code>All National Youth Tobacco Survey Questions Related to Electronic Cigarette</code>.</p>
 </div>
 <div id="iii.-description-of-data-import-cleaning-transformation" class="section level1">
@@ -152,7 +152,7 @@
   ggparcoord(columns = 2:5, scale = &quot;globalminmax&quot;, splineFactor = 10, alphaLines = 0.5, groupColumn = 6) +
   scale_y_discrete(limits=c(&quot;Definitely yes&quot;,&quot;Probably yes&quot;,&quot;Probably not&quot;,&quot;Definitely not&quot;)) +
   labs(x=&quot;Questions&quot;,y=&quot;Responses&quot;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>The most obvious pattern are whether youth are curious about the e-cigarettes almost determines whether they will try e-cigarettes.</p>
 <p>If we exam the pictures more carefully, we can see the effects of friends. The lines accross <code>Probably yes</code> and <code>Definitely yes</code> from <code>Q37</code> are denser than those from <code>Q35</code> and <code>Q36</code>. This indicates a little bit of the reasons of why youth use e-cigarettes. If you can not see clearly due to the bad representation of the samples, never mind, we will study this more throughtly in the following parts.</p>
 </div>
@@ -189,7 +189,7 @@ Reasons[19:25,5:14]</code></pre>
   tibble(Choice = c(&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;I&quot;,&quot;J&quot;), Count = .) %&gt;%
   ggplot() + 
   geom_col(aes(x=Choice, y=Count))</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>Reasons %&gt;% count(Q33) %&gt;% filter(n&gt;=10) %&gt;% arrange(desc(n)) %&gt;% 
   filter(n!=75) %&gt;% mutate(Related_to_B = ifelse(stringr::str_detect(Q33, &quot;B&quot;), &#39;Yes&#39;, &#39;No&#39;)) %&gt;%
   mutate(Q33 = forcats::fct_reorder(Q33, n, .desc=FALSE)) %&gt;%
@@ -197,7 +197,9 @@ Reasons[19:25,5:14]</code></pre>
   ggplot() + 
   geom_col(aes(x = Q33, y=Count, fill=Related_to_B)) +
   coord_flip()</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width="1000" height="800&quot;">
+</iframe>
 </div>
 </div>
 </div>
