@@ -7,50 +7,32 @@ tags: ["R Markdown", "plot", "regression"]
 ---
 
 ```{r, warning=FALSE, message=FALSE, include=FALSE}
-#knitr::include_app("https://liuyanguu.shinyapps.io/bcl_app/", height = "100%")
-#setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project/blog")
-library(ggplot2) 
+library(ggplot2)
 library(dplyr)
 library(GGally)
+library(vcd)
+library(vcdExtra)
+library(RColorBrewer)
+
+# setwd("/Users/husky/Desktop/5293/project/")
 setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
 
-questions_num <- readr::read_csv("./output/attitude/Number of Questions.csv")
-questions_num$Type <- factor(questions_num$Type, levels = c("Indirectly Related", "Directly Related"))
+questions_num <- readr::read_csv("./output/Number of Questions.csv") %>% 
+  mutate(Type = factor(Type, levels = c("Indirectly Related", "Directly Related")))
 
 NYTS_2018_Full <- readr::read_csv("./data/2018-NYTS/nyts2018.csv")
-NYTS_2018_Selected <- NYTS_2018_Full %>% select(matches("Q(1|2|3|5)[A-Z]?$"),  contains('Q33'), 'Q27', 'Q35', 'Q68', 'Q69', 'Q28','Q29','Q30','Q31','Q34','Q36','Q37') %>%
-  mutate(Q33A = ifelse(Q33A==1, "A", Q33A)) %>% mutate(Q33B = ifelse(Q33B==1, "B", Q33B)) %>%
-  mutate(Q33C = ifelse(Q33C==1, "C", Q33C)) %>% mutate(Q33D = ifelse(Q33D==1, "D", Q33D)) %>%
-  mutate(Q33E = ifelse(Q33E==1, "E", Q33E)) %>% mutate(Q33F = ifelse(Q33F==1, "F", Q33F)) %>%
-  mutate(Q33G = ifelse(Q33G==1, "G", Q33G)) %>% mutate(Q33H = ifelse(Q33H==1, "H", Q33H)) %>%
-  mutate(Q33I = ifelse(Q33I==1, "I", Q33I)) %>% mutate(Q33J = ifelse(Q33J==1, "J", Q33J)) %>%
-  #mutate(Q33Fake = coalesce(Q33A,Q33B,Q33C,Q33D,Q33E,Q33F,Q33G,Q33H,Q33I,Q33J)) %>%
-  mutate(Q33 = stringr::str_replace_all(paste(Q33A,Q33B,Q33C,Q33D,Q33E,Q33F,Q33G,Q33H,Q33I,Q33J, sep = ""),"NA","")) %>%
-  mutate(Q5A = ifelse(Q5A==1, "A", Q5A)) %>% mutate(Q5B = ifelse(Q5B==1, "B", Q5B)) %>%
-  mutate(Q5C = ifelse(Q5C==1, "C", Q5C)) %>% mutate(Q5D = ifelse(Q5D==1, "D", Q5D)) %>%
-  mutate(Q5E = ifelse(Q5E==1, "E", Q5E)) %>% 
-  select(matches("Q(1|2|3)$"), 'Q27','Q28','Q29','Q30','Q31','Q34','Q35','Q36','Q37','Q68','Q69', contains('Q33')) %>%
-  filter(Q2!='*') %>% filter(Q3!='*') %>% filter(Q34!='*') %>% filter(Q27!='*') %>% 
-  filter(Q35!='*') %>% filter(Q68!='*') %>% filter(Q69!='*') %>% filter(Q37!='*') %>% 
-  filter(Q29!='**') %>% filter(Q1!='**')
+NYTS_2018_Selected <- readRDS("./output/NYTS_2018_Selected.rds")
 
-NYTS_2017_Full <- readr::read_csv("./data/2017-NYTS/nyts2017.csv")
-NYTS_2017_Selected <- NYTS_2017_Full %>% select(matches("Q(1|2|3|5)[A-Z]?$"),  contains('Q33'), 'Q27', 'Q35', 'Q68', 'Q69', 'Q28','Q29','Q30','Q31','Q34','Q36','Q37') %>%
-  mutate(Q33A = ifelse(Q33A==1, "A", Q33A)) %>% mutate(Q33B = ifelse(Q33B==1, "B", Q33B)) %>%
-  mutate(Q33C = ifelse(Q33C==1, "C", Q33C)) %>% mutate(Q33D = ifelse(Q33D==1, "D", Q33D)) %>%
-  mutate(Q33E = ifelse(Q33E==1, "E", Q33E)) %>% mutate(Q33F = ifelse(Q33F==1, "F", Q33F)) %>%
-  mutate(Q33G = ifelse(Q33G==1, "G", Q33G)) %>% mutate(Q33H = ifelse(Q33H==1, "H", Q33H)) %>%
-  mutate(Q33I = ifelse(Q33I==1, "I", Q33I)) %>% mutate(Q33J = ifelse(Q33J==1, "J", Q33J)) %>%
-  #mutate(Q33Fake = coalesce(Q33A,Q33B,Q33C,Q33D,Q33E,Q33F,Q33G,Q33H,Q33I,Q33J)) %>%
-  mutate(Q33 = stringr::str_replace_all(paste(Q33A,Q33B,Q33C,Q33D,Q33E,Q33F,Q33G,Q33H,Q33I,Q33J, sep = ""),"NA","")) %>%
-  mutate(Q5A = ifelse(Q5A==1, "A", Q5A)) %>% mutate(Q5B = ifelse(Q5B==1, "B", Q5B)) %>%
-  mutate(Q5C = ifelse(Q5C==1, "C", Q5C)) %>% mutate(Q5D = ifelse(Q5D==1, "D", Q5D)) %>%
-  mutate(Q5E = ifelse(Q5E==1, "E", Q5E)) %>% 
-  select(matches("Q(1|2|3)$"), 'Q27','Q28','Q29','Q30','Q31','Q34','Q35','Q36','Q37','Q68','Q69', contains('Q33')) %>%
-  filter(Q2!='*') %>% filter(Q3!='*') %>% filter(Q34!='*') %>% filter(Q27!='*') %>% 
-  filter(Q35!='*') %>% filter(Q68!='*') %>% filter(Q69!='*') %>% filter(Q37!='*') %>% 
-  filter(Q29!='**') %>% filter(Q1!='**')
+adv <- readRDS("./output/adv.rds")
+ratio <- readRDS("./output/ratio.rds")
+regular <- readRDS("./output/regular.rds")
+age_first1 <- readRDS("./output/age_first1.rds")
+regular_per <- readRDS("./output/regular_per.rds")
+addiction.rate <- readRDS("./output/addiction.rate.rds")
+addiction.rate.male <- readRDS("./output/addiction.rate.male.rds")
+addiction.rate.female <- readRDS("./output/addiction.rate.female.rds")
 ```
+
 
 # I. Introduction
 
@@ -181,14 +163,102 @@ NYTS_2018_Full %>% select(contains('Q33')) %>%
 ```
 
 ```{r}
-Reasons %>% count(Q33) %>% filter(n>=10) %>% arrange(desc(n)) %>% 
+Reasons %>% count(Q33) %>% filter(n>=10) %>% arrange(desc(n)) %>%
   filter(n!=75) %>% mutate(Related_to_B = ifelse(stringr::str_detect(Q33, "B"), 'Yes', 'No')) %>%
   mutate(Q33 = forcats::fct_reorder(Q33, n, .desc=FALSE)) %>%
   mutate(Count = n) %>%
-  ggplot() + 
+  ggplot() +
   geom_col(aes(x = Q33, y=Count, fill=Related_to_B)) +
   coord_flip()
 ```
+
+One thing we are interested in is how likely people become "addictive" after they try e-cigarettes once or twice and become regular smokers. We define "addictive" and "regular smokers" as thoses who spend more than two days to smoke e-cigarettes within 30 days. This question is addressed in two steps: 
+1) what is the percentage of regular smokers in the whole population?
+2) what is the percentage of regular smokers among those who tried to smoke once or twice?
+And in order to give our readers a direct impression about the extent of addction, we compare with the data of ordinary cigarettes. The results are shown in the following several figures.
+```{r}
+ggplot()+
+  geom_line(aes(x=2014:2018,y=regular_per[1,],color="e-cigarette"),size=1.5)+
+  geom_line(aes(x=2014:2018,y=regular_per[2,],color="cigarette"),size=1.5)+
+  xlab("year")+
+  ylab("percentage of regular smoker")+ggtitle("percentage of regular smoker of e-cigarette/cigarette in each year")
+```
+
+The lines in the figure answers the first question, showing above shows that there about 4.5% to 9% regular e-cigarettes users in the youth, compared to 3% to 4% regular cigarettes smakers in the youth. This result is probably contradictary to our commen sense: there are more cigarettes smokers around us than e-cigarettes smakers. Our commen sense may be true for adults, however, it is a different story in youth group. E-cigarettes are more popular in youth group.
+
+Another thing that worths to notices is that the percentage of regular e-cigarettes smokers is generally increases while the percentage of cigarettes is generally decreasing, suggesting e-cigarettes are becoming a trend among youth.
+
+In addition to the investigations in the whole youth population, gender is also considered as an important factor: we would like to find out whether there is a huge difference between different genders with respect to smoking. Here is the result:
+
+```{r}
+ggplot()+ 
+  geom_line(aes(x=2014:2018,y=ratio[1,],color="e-cigarette"))+
+  geom_line(aes(x=2014:2018,y=ratio[2,],color="cigarette"))+
+  xlab("year")+ylab("ratio:female/male ")+
+  ggtitle("ratio of female and male regular smokers")
+```
+
+It seems that males are more "fashionable" in regards to smoking. There is higher female precentage in traditional smoking, than in the new-born e-cigarettes smoking.
+
+To answer the second question, we plot the percentage of regular smokers among those who tried to smoke once or twice. Ther higher the percentage is, the more likely people sink into it.
+
+```{r}
+ggplot()+
+  geom_line(aes(x=2014:2018,y=addiction.rate.male,color="male"))+
+  geom_line(aes(x=2014:2018,y=addiction.rate,color="overall"),size=1)+
+  geom_line(aes(x=2014:2018,y=addiction.rate.female,color="female"))+
+  xlab("year")+
+  ylab("addiction rate")+
+  ggtitle("percentage of those who tried e-cigarette to be addicted to it")
+```
+
+The figure above shows that 25% of those who are willing to try e-cigarettes turn out to be regular smokers. Tha explaination for this can be multiple: it is possible that in the beginning 1/4 of the triers are determined to be regular smokers. Or it is possible that e-cigarettes can attract 1/4 of the triers. Gender also plays a role in the process. Female are less likely to turn into a regular e-cigarette smoker than males.
+
+###################
+
+As previously shown, e-cigarettes seem to become more and more popular among young people. Not only is it reflected in the percentage of regular smokers, but also reflected in the age when people try e-cigarettes for the first time. 
+
+
+```{r}
+age_first1 %>% 
+  mutate(year = factor(year)) %>%
+  ggplot()+
+  geom_boxplot(aes(y=age,x=year,fill=year))+
+  xlab("year")+
+  ylab("age of first-time smoking")+
+  ggtitle("boxplot of age of trying e-cigarette for the first time")
+```
+The figure above shows that the age when the youth try their first taste of e-cigarettes becomes younger. In the investigation in 2014, it happened at the age of 15. Now in 2018, it happens at the age of 14.
+
+##################
+
+One one hand, we see the popularity of e-cigarettes among youth. On the other hand, the days people spend to use e-cigarettes is increasing. We suspect it is partially due to the popularity of e-cigarettes. One possibility is that when people realize e-cigarette is a fishionable thing, they may have less motive to restrain themselves from it. Another reason we can think of is that people with more years of smoking experience tend to smoke more often. E-cigarettes is a new thing, so the percentage of many-years smoker is still increasing.
+
+```{r}
+ggplot(data = regular[regular$key=="e"&regular$days>0,])+
+  geom_boxplot(aes(y=days,x=as.factor(year),fill=as.factor(year)))+
+  xlab("year")+ylab("days of smoking within one month")+
+  ggtitle("boxplot of days of smoking within one month")
+```
+The figure above shows that in 2014, the average days people spend in smoke was 9 days. Afterwards it gradually increases to 14 days in 2018.
+
+#############
+The questionair includs questions about advertisement in four kinds of media: internet, newspaper, supermarkets, TV. It asks how often do youth see advertisement of e-cigarette in those media. Five options are given: never, rarely, sometimes, most of the time, always.
+
+```{r}
+index<-complete.cases(adv)
+adv<- adv[adv$fre>1 & index,]
+adv$fre<- as.factor(adv$fre)
+adv$source<-as.factor(adv$source)
+levels(adv$fre)<- c("Never","Rarely","Sometimes","Most of the time","Always")
+platte <- rev(brewer.pal(5, 'RdBu'))
+vcd::mosaic(fre ~ source, adv,
+            direction = c("v", "h"),
+            gp = gpar(fill = platte),
+            rot_labels=c(0,90,0,0))
+```
+
+From the figure above, we are able to conclude that less advertisements are put in newspaper. Relatively more ads are put in internet, supermarket and TV. It is possibly because less and less people read newspapers. It looks like it is more often to see advertisement of e-cigarettes in supermarket. Though youth may show up on the internet more often, supermarket is the main battleground for e-cigarette to win custumers. One explaination is that people with purchasing power are more likely to go to supermarket, and manufacturer wants to win over those potential clinets.
 
 <iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width=1000 height=800"></iframe>
 

@@ -1,0 +1,12 @@
+name: e-cigarette
+title: e-cigarette
+username:
+account: paranoidism
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 898804
+bundleId: 2048601
+url: https://paranoidism.shinyapps.io/e-cigarette/
+when: 1556595833.09742
+asMultiple: FALSE
+asStatic: FALSE

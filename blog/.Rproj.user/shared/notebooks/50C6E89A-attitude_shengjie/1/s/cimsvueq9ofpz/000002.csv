@@ -1,6 +1,0 @@
-"0","```r
-```r
-Reasons <- NYTS_2018_full%>% filter(is.na(Q33A)) %>% select(matches(\Q(1|2|3)$\), contains('Q33'))
-Reasons %>% count(Q33) %>% filter(n>=10) %>% arrange(desc(n)) %>% filter(n!=75)
-```
-```"

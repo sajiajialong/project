@@ -123,16 +123,80 @@ Reasons[19:25,5:14]</code></pre>
   ggplot() + 
   geom_col(aes(x=Choice, y=Count))</code></pre>
 <p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>Reasons %&gt;% count(Q33) %&gt;% filter(n&gt;=10) %&gt;% arrange(desc(n)) %&gt;% 
+<pre class="r"><code>Reasons %&gt;% count(Q33) %&gt;% filter(n&gt;=10) %&gt;% arrange(desc(n)) %&gt;%
   filter(n!=75) %&gt;% mutate(Related_to_B = ifelse(stringr::str_detect(Q33, &quot;B&quot;), &#39;Yes&#39;, &#39;No&#39;)) %&gt;%
   mutate(Q33 = forcats::fct_reorder(Q33, n, .desc=FALSE)) %&gt;%
   mutate(Count = n) %&gt;%
-  ggplot() + 
+  ggplot() +
   geom_col(aes(x = Q33, y=Count, fill=Related_to_B)) +
   coord_flip()</code></pre>
 <p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>One thing we are interested in is how likely people become “addictive” after they try e-cigarettes once or twice and become regular smokers. We define “addictive” and “regular smokers” as thoses who spend more than two days to smoke e-cigarettes within 30 days. This question is addressed in two steps: 1) what is the percentage of regular smokers in the whole population? 2) what is the percentage of regular smokers among those who tried to smoke once or twice? And in order to give our readers a direct impression about the extent of addction, we compare with the data of ordinary cigarettes. The results are shown in the following several figures.</p>
+<pre class="r"><code>ggplot()+
+  geom_line(aes(x=2014:2018,y=regular_per[1,],color=&quot;e-cigarette&quot;),size=1.5)+
+  geom_line(aes(x=2014:2018,y=regular_per[2,],color=&quot;cigarette&quot;),size=1.5)+
+  xlab(&quot;year&quot;)+
+  ylab(&quot;percentage of regular smoker&quot;)+ggtitle(&quot;percentage of regular smoker of e-cigarette/cigarette in each year&quot;)</code></pre>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>The lines in the figure answers the first question, showing above shows that there about 4.5% to 9% regular e-cigarettes users in the youth, compared to 3% to 4% regular cigarettes smakers in the youth. This result is probably contradictary to our commen sense: there are more cigarettes smokers around us than e-cigarettes smakers. Our commen sense may be true for adults, however, it is a different story in youth group. E-cigarettes are more popular in youth group.</p>
+<p>Another thing that worths to notices is that the percentage of regular e-cigarettes smokers is generally increases while the percentage of cigarettes is generally decreasing, suggesting e-cigarettes are becoming a trend among youth.</p>
+<p>In addition to the investigations in the whole youth population, gender is also considered as an important factor: we would like to find out whether there is a huge difference between different genders with respect to smoking. Here is the result:</p>
+<pre class="r"><code>ggplot()+ 
+  geom_line(aes(x=2014:2018,y=ratio[1,],color=&quot;e-cigarette&quot;))+
+  geom_line(aes(x=2014:2018,y=ratio[2,],color=&quot;cigarette&quot;))+
+  xlab(&quot;year&quot;)+ylab(&quot;ratio:female/male &quot;)+
+  ggtitle(&quot;ratio of female and male regular smokers&quot;)</code></pre>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>It seems that males are more “fashionable” in regards to smoking. There is higher female precentage in traditional smoking, than in the new-born e-cigarettes smoking.</p>
+<p>To answer the second question, we plot the percentage of regular smokers among those who tried to smoke once or twice. Ther higher the percentage is, the more likely people sink into it.</p>
+<pre class="r"><code>ggplot()+
+  geom_line(aes(x=2014:2018,y=addiction.rate.male,color=&quot;male&quot;))+
+  geom_line(aes(x=2014:2018,y=addiction.rate,color=&quot;overall&quot;),size=1)+
+  geom_line(aes(x=2014:2018,y=addiction.rate.female,color=&quot;female&quot;))+
+  xlab(&quot;year&quot;)+
+  ylab(&quot;addiction rate&quot;)+
+  ggtitle(&quot;percentage of those who tried e-cigarette to be addicted to it&quot;)</code></pre>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>The figure above shows that 25% of those who are willing to try e-cigarettes turn out to be regular smokers. Tha explaination for this can be multiple: it is possible that in the beginning 1/4 of the triers are determined to be regular smokers. Or it is possible that e-cigarettes can attract 1/4 of the triers. Gender also plays a role in the process. Female are less likely to turn into a regular e-cigarette smoker than males.</p>
+<div id="section" class="section level19">
+<p></p>
+<p>As previously shown, e-cigarettes seem to become more and more popular among young people. Not only is it reflected in the percentage of regular smokers, but also reflected in the age when people try e-cigarettes for the first time.</p>
+<pre class="r"><code>age_first1 %&gt;% 
+  mutate(year = factor(year)) %&gt;%
+  ggplot()+
+  geom_boxplot(aes(y=age,x=year,fill=year))+
+  xlab(&quot;year&quot;)+
+  ylab(&quot;age of first-time smoking&quot;)+
+  ggtitle(&quot;boxplot of age of trying e-cigarette for the first time&quot;)</code></pre>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-10-1.png" width="672" /> The figure above shows that the age when the youth try their first taste of e-cigarettes becomes younger. In the investigation in 2014, it happened at the age of 15. Now in 2018, it happens at the age of 14.</p>
+</div>
+<div id="section-1" class="section level18">
+<p></p>
+<p>One one hand, we see the popularity of e-cigarettes among youth. On the other hand, the days people spend to use e-cigarettes is increasing. We suspect it is partially due to the popularity of e-cigarettes. One possibility is that when people realize e-cigarette is a fishionable thing, they may have less motive to restrain themselves from it. Another reason we can think of is that people with more years of smoking experience tend to smoke more often. E-cigarettes is a new thing, so the percentage of many-years smoker is still increasing.</p>
+<pre class="r"><code>ggplot(data = regular[regular$key==&quot;e&quot;&amp;regular$days&gt;0,])+
+  geom_boxplot(aes(y=days,x=as.factor(year),fill=as.factor(year)))+
+  xlab(&quot;year&quot;)+ylab(&quot;days of smoking within one month&quot;)+
+  ggtitle(&quot;boxplot of days of smoking within one month&quot;)</code></pre>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-11-1.png" width="672" /> The figure above shows that in 2014, the average days people spend in smoke was 9 days. Afterwards it gradually increases to 14 days in 2018.</p>
+</div>
+<div id="section-2" class="section level13">
+<p></p>
+<p>The questionair includs questions about advertisement in four kinds of media: internet, newspaper, supermarkets, TV. It asks how often do youth see advertisement of e-cigarette in those media. Five options are given: never, rarely, sometimes, most of the time, always.</p>
+<pre class="r"><code>index&lt;-complete.cases(adv)
+adv&lt;- adv[adv$fre&gt;1 &amp; index,]
+adv$fre&lt;- as.factor(adv$fre)
+adv$source&lt;-as.factor(adv$source)
+levels(adv$fre)&lt;- c(&quot;Never&quot;,&quot;Rarely&quot;,&quot;Sometimes&quot;,&quot;Most of the time&quot;,&quot;Always&quot;)
+platte &lt;- rev(brewer.pal(5, &#39;RdBu&#39;))
+vcd::mosaic(fre ~ source, adv,
+            direction = c(&quot;v&quot;, &quot;h&quot;),
+            gp = gpar(fill = platte),
+            rot_labels=c(0,90,0,0))</code></pre>
+<p><img src="/post/electronic-cigarette-and-youth_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>From the figure above, we are able to conclude that less advertisements are put in newspaper. Relatively more ads are put in internet, supermarket and TV. It is possibly because less and less people read newspapers. It looks like it is more often to see advertisement of e-cigarettes in supermarket. Though youth may show up on the internet more often, supermarket is the main battleground for e-cigarette to win custumers. One explaination is that people with purchasing power are more likely to go to supermarket, and manufacturer wants to win over those potential clinets.</p>
 <iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width="1000" height="800&quot;">
 </iframe>
+</div>
 </div>
 </div>
 </div>
