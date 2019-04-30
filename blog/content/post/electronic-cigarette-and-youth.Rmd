@@ -14,8 +14,8 @@ library(vcd)
 library(vcdExtra)
 library(RColorBrewer)
 
-# setwd("/Users/husky/Desktop/5293/project/")
-setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
+ setwd("/Users/husky/Desktop/5293/project/")
+#setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
 
 questions_num <- readr::read_csv("./output/Number of Questions.csv") %>% 
   mutate(Type = factor(Type, levels = c("Indirectly Related", "Directly Related")))
@@ -183,8 +183,8 @@ And in order to give our readers a direct impression about the extent of addctio
 ggplot()+
   geom_line(aes(x=2014:2018,y=regular_per[1,],color="e-cigarette"),size=1.5)+
   geom_line(aes(x=2014:2018,y=regular_per[2,],color="cigarette"),size=1.5)+
-  xlab("year")+
-  ylab("percentage of regular smoker")+ggtitle("percentage of regular smoker of e-cigarette/cigarette in each year")
+  xlab("Year")+
+  ylab("Percentage of regular smoker")+ggtitle("Percentage of regular smoker of e-cigarette/cigarette in each year")
 ```
 
 The lines in the figure answers the first question, showing above shows that there about 4.5% to 9% regular e-cigarettes users in the youth, compared to 3% to 4% regular cigarettes smakers in the youth. This result is probably contradictary to our commen sense: there are more cigarettes smokers around us than e-cigarettes smakers. Our commen sense may be true for adults, however, it is a different story in youth group. E-cigarettes are more popular in youth group.
