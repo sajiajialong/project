@@ -101,11 +101,11 @@ One thing we are interested in is how likely people become "addictive" after the
 ggplot()+
   geom_line(aes(x=2014:2018,y=regular_per[1,],color="e-cigarette"),size=1.5)+
   geom_line(aes(x=2014:2018,y=regular_per[2,],color="cigarette"),size=1.5)+
-  xlab("year")+
-  ylab("percentage of regular smoker")+ggtitle("percentage of regular smoker of e-cigarette/cigarette in each year")
+  xlab("Year")+
+  ylab("Percentage of regular smoker")+labs(color="Color")+ggtitle("Percentage of Regular Smoker of E-cigarette/cigarette in Each Year")
 ```
 
-The lines in the figure answers the first question, showing above shows that there about 4.5% to 9% regular e-cigarettes users in the youth, compared to 3% to 4% regular cigarettes smakers in the youth. This result is probably contradictary to our commen sense: there are more cigarettes smokers around us than e-cigarettes smakers. Our commen sense may be true for adults, however, it is a different story in youth group. E-cigarettes are more popular in youth group.
+The lines in the figure answers the first question, showing above shows that there about 4.5% to 9% regular e-cigarettes users in the youth, compared to 3% to 4% regular cigarettes smakers in the youth. This result is probably contradictory to our common sense: there are more cigarettes smokers around us than e-cigarettes smakers. Our common sense may be true for adults, however, it is a different story in youth group. E-cigarettes are more popular in youth group.
 
 Another thing that worths to notices is that the percentage of regular e-cigarettes smokers is generally increases while the percentage of cigarettes is generally decreasing, suggesting e-cigarettes are becoming a trend among youth.
 
@@ -113,10 +113,10 @@ In addition to the investigations in the whole youth population, gender is also 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot()+ 
-  geom_line(aes(x=2014:2018,y=ratio[1,],color="e-cigarette"))+
-  geom_line(aes(x=2014:2018,y=ratio[2,],color="cigarette"))+
-  xlab("year")+ylab("ratio:female/male ")+
-  ggtitle("ratio of female and male regular smokers")
+  geom_line(aes(x=2014:2018,y=ratio[1,],color="e-cigarette"),size=1.5)+
+  geom_line(aes(x=2014:2018,y=ratio[2,],color="cigarette"),size=1.5)+
+  xlab("Year")+ylab("Ratio:female/male ")+labs(color="Color")+
+  ggtitle("Ratio of Female and Male Regular Smokers")
 ```
 
 It seems that males are more "fashionable" in regards to smoking. There is higher female precentage in traditional smoking, than in the new-born e-cigarettes smoking.
@@ -125,15 +125,15 @@ To answer the second question, we plot the percentage of regular smokers among t
 
 
 ### Age
-As previously shown, e-cigarettes seem to become more and more popular among young people. Not only is it reflected in the percentage of regular smokers, but also reflected in the age when people try e-cigarettes for the first time. 
+    As previously shown, e-cigarettes seem to become more and more popular among young people. Not only is it reflected in the percentage of regular smokers, but also reflected in the age when people try e-cigarettes for the first time. 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 age_first1 %>% 
   mutate(year = factor(year)) %>%
   ggplot()+
   geom_boxplot(aes(y=age,x=year,fill=year))+
-  xlab("year")+
-  ylab("age of first-time smoking")+
-  ggtitle("boxplot of age of trying e-cigarette for the first time")
+  xlab("Year")+
+  ylab("Age of first-time smoking")+labs(fill="Year")+
+  ggtitle("Boxplot of Age of Trying E-cigarette for the First Time")
 ```
 The figure above shows that the age when the youth try their first taste of e-cigarettes becomes younger. In the investigation in 2014, it happened at the age of 15. Now in 2018, it happens at the age of 14.
 
@@ -143,10 +143,10 @@ One one hand, we see the popularity of e-cigarettes among youth. On the other ha
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(data = regular[regular$key=="e"&regular$days>0,])+
   geom_boxplot(aes(y=days,x=as.factor(year),fill=as.factor(year)))+
-  xlab("year")+ylab("days of smoking within one month")+
-  ggtitle("boxplot of days of smoking within one month")
+  xlab("Year")+ylab("Days of smoking within one month")+labs(fill="Year")+
+  ggtitle("Boxplot of Days of Smoking within One Month")
 ```
-The figure above shows that in 2014, the average days people spend in smoke was 9 days. Afterwards it gradually increases to 14 days in 2018.
+The figure above shows that in 2014, the average days people spend in smoking was 3 days. Afterwards it gradually increases to 5 days in 2018. The increase of number of smokers with the middle levelof addiction or even higher is more obvious, though it is masked by the majority with low-level addiction.
 
 ### Advertisement
 The questionair includs questions about advertisement in four kinds of media: internet, newspaper, supermarkets, TV. It asks how often do youth see advertisement of e-cigarette in those media. Five options are given: never, rarely, sometimes, most of the time, always.
