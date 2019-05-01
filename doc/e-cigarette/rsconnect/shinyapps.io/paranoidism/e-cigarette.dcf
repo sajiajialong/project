@@ -5,8 +5,8 @@ account: paranoidism
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 898804
-bundleId: 2051520
+bundleId: 2051656
 url: https://paranoidism.shinyapps.io/e-cigarette/
-when: 1556674045.22706
+when: 1556678809.99632
 asMultiple: FALSE
 asStatic: FALSE

@@ -25,6 +25,8 @@ shinyServer(function(input, output) {
         group_by(Q2) %>% 
         mutate(Percentage = n/sum(n)) %>%
         ggplot(aes(x=Q31, y=Percentage, fill=Q2)) +
-        geom_col(position = 'dodge')
+        geom_col(position = 'dodge') +
+        labs(x = "Level of addiction", fill="Sex") +
+        scale_x_continuous(breaks = c(1,2,3,4,5,6,7))
     })
 })

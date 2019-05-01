@@ -1,12 +1,8 @@
 ---
-title: "Electronic Cigarette and Youth"
-author: "Shengjie Sun & Chen Chen"
-date: '2019-04-30'
-tags:
-- R Markdown
-- plot
-- regression
-categories: R
+title: "E-Cigarette and Youth"
+author: "Shengjie Sun(ss5593) & Chen Chen(cc4317)"
+date: "4/30/2019"
+output: html_document
 ---
 
 ```{r, warning=FALSE, message=FALSE, include=FALSE}
@@ -297,7 +293,7 @@ Our dear reader might also have your own opinion about e-cigarettes, like whethe
 There are 7 groups of bars, each of which includes a bar for female (red) and a bar for male (green). The x-axis is the number of days to smoke e-cigarettes within 30 days. That represents the level of addiction to e-cigarettes: the group in the most left side is the group who did not smoke any e-cigarettes during the last 30 days. We can take that as the lowest level of addiction. The group on the most right side is the group who smoke e-cigarettes every day during the past 30 days, which represents the highest level of addiction. Other groups are in between the two extremes.
 The y-axis represents the percentage to fall into each group. For instance, if you are a female and you choose "famous people in the movie or on TV use them", you will have 24% probability to fall into the group of "highest addiction".
 
-<iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width=1000 height=800"></iframe>
+# <iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width=1000 height=800"></iframe>
 
 # Conclusion
 
