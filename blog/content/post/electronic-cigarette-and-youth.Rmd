@@ -14,8 +14,8 @@ library(vcd)
 library(vcdExtra)
 library(RColorBrewer)
 
-# setwd("/Users/husky/Desktop/5293/project/")
-setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
+setwd("/Users/husky/Desktop/5293/project/")
+#setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
 
 questions_num <- readr::read_csv("./output/Number of Questions.csv") %>% 
   mutate(Type = factor(Type, levels = c("Indirectly Related", "Directly Related")))
@@ -95,8 +95,8 @@ Describe any patterns you discover in missing values.
 ## lalalalala
 One thing we are interested in is how likely people become "addictive" after they try e-cigarettes once or twice and become regular smokers. We define "addictive" and "regular smokers" as thoses who spend more than two days to smoke e-cigarettes within 30 days. This question is addressed in two steps: 
 1) what is the percentage of regular smokers in the whole population?
-2) what is the percentage of regular smokers among those who tried to smoke once or twice?
-And in order to give our readers a direct impression about the extent of addction, we compare with the data of ordinary cigarettes. The results are shown in the following several figures.
+2) what is the percentage of regular smokers among those who tried to smoke once or twice? That is, how likely that people become "addictive" after they have a try to e-cigarettes?
+  And in order to give our readers a direct impression about the extent of addction, we compare with the data of ordinary cigarettes. The results are shown in the following several figures.
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot()+
   geom_line(aes(x=2014:2018,y=regular_per[1,],color="e-cigarette"),size=1.5)+
@@ -267,3 +267,17 @@ The figure above shows that 25% of those who are willing to try e-cigarettes tur
 
 
 <iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width=1000 height=800"></iframe>
+
+
+
+##############
+Our dear reader might also have your own opinion about e-cigarettes, like whether it is harmful, or whether its flavors are fascinating. People with different reasons to try e-cigarettes might end up with different level of addiction to e-cigarettes. Some might just give it up. Others might become a regular user. Others might be obsessed with it. Different genders might also have different results in regard to the extent of addiction. With the data that we have, a rough estimate to the level of addiction can be given on the basis that you plan to have a try to e-cigarettes of have already had a try to e-cigarettes. Here is the guidance:
+
+1 Ask yourself whether you are going to have a try to e-cigarettes or have already had a try before. If not, just forget about it. If yes, go to the next step.
+2 Choose your opinion about e-cigarettes. You can check multiple options.
+3 Look up the barplot. 
+There are 7 groups of bars, each of which includes a bar for female (red) and a bar for male (green). The x-axis are the number of days to smoke e-cigarettes within 30 days. That represents the level of addiction to e-cigarettes: the group in the most left side is the group who did not smoke any e-cigarettes during the last 30 days. We can take that as the lowest level of addiction. The group on the most right side is the group who smoke e-cigarettes every day during the past 30 days, which represents the highest level of addiction. Other groups are in between of the two extremes.
+The y axis represent the percentage to fall into each group. For instance, if you are a female and you choose "famous people in movie or on TV use them", you will have 24% probability to fall into the group of "highest addiction".
+
+
+
