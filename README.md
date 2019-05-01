@@ -5,7 +5,7 @@
 3. Dataset: https://chronicdata.cdc.gov/Survey-Data/Youth-Risk-Behavioral-Surveillance-System-YRBSS-Da/3596-ayf6
 
 
-###**Some Points**
+**Some Points**
 
 The goal of this project is to perform an exploratory data analysis / create visualizations with data of your choosing in order to gain preliminary insights on questions of interest to you.
 
