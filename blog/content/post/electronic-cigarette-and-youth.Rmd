@@ -14,8 +14,8 @@ library(vcd)
 library(vcdExtra)
 library(RColorBrewer)
 
-#setwd("/Users/husky/Desktop/5293/project/")
-setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
+setwd("/Users/husky/Desktop/5293/project/")
+#setwd("C:/Users/sheng/OneDrive/CU Second Semester/Statistical Graphics/Final Project")
 
 questions_num <- readr::read_csv("./output/Number of Questions.csv") %>% 
   mutate(Type = factor(Type, levels = c("Indirectly Related", "Directly Related")))
@@ -96,8 +96,6 @@ Again, missing value is a very little thing in our datasets and the dimension of
 # V. Results
 
 ## Trends and Patterns of the Usage of E-cigarettes
-
-## lalalalala
 One thing we are interested in is how likely people become "addictive" after they try e-cigarettes once or twice and become regular smokers. We define "addictive" and "regular smokers" as thoses who spend more than two days to smoke e-cigarettes within 30 days. This question is addressed in two steps: 
 1) what is the percentage of regular smokers in the whole population?
 2) what is the percentage of regular smokers among those who tried to smoke once or twice? That is, how likely that people become "addictive" after they have a try to e-cigarettes?
@@ -129,6 +127,19 @@ ggplot()+
 It seems that males are more "fashionable" in regards to smoking. There is higher female precentage in traditional smoking, than in the new-born e-cigarettes smoking.
 
 To answer the second question, we plot the percentage of regular smokers among those who tried to smoke once or twice. Ther higher the percentage is, the more likely people sink into it.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot()+
+  geom_line(aes(x=2014:2018,y=addiction.rate.male,color="male"))+
+  geom_line(aes(x=2014:2018,y=addiction.rate,color="overall"),size=1)+
+  geom_line(aes(x=2014:2018,y=addiction.rate.female,color="female"))+
+  xlab("year")+
+  ylab("addiction rate")+
+  ggtitle("percentage of those who tried e-cigarette to be addicted to it")+
+  theme_bw()
+```
+
+The figure above shows that 25% of those who are willing to try e-cigarettes turn out to be regular smokers. Tha explaination for this can be multiple: it is possible that in the beginning 1/4 of the triers are determined to be regular smokers. Or it is possible that e-cigarettes can attract 1/4 of the triers. Gender also plays a role in the process. Female are less likely to turn into a regular e-cigarette smoker than males.
 
 
 ### Age
@@ -170,7 +181,7 @@ platte <- rev(brewer.pal(5, 'RdBu'))
 vcd::mosaic(fre ~ source, adv,
             direction = c("v", "h"),
             gp = gpar(fill = platte),
-            rot_labels=c(0,90,0,0))
+            rot_labels=c(15,0,30,50))
 ```
 
 From the figure above, we are able to conclude that less advertisements are put in newspaper. Relatively more ads are put in internet, supermarket and TV. It is possibly because less and less people read newspapers. It looks like it is more often to see advertisement of e-cigarettes in supermarket. Though youth may show up on the internet more often, supermarket is the main battleground for e-cigarette to win custumers. One explaination is that people with purchasing power are more likely to go to supermarket, and manufacturer wants to win over those potential clinets.
@@ -264,19 +275,6 @@ Reasons %>% count(Q33) %>% filter(n>=10) %>% arrange(desc(n)) %>%
   theme_bw()
 ```
 
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-ggplot()+
-  geom_line(aes(x=2014:2018,y=addiction.rate.male,color="male"))+
-  geom_line(aes(x=2014:2018,y=addiction.rate,color="overall"),size=1)+
-  geom_line(aes(x=2014:2018,y=addiction.rate.female,color="female"))+
-  xlab("year")+
-  ylab("addiction rate")+
-  ggtitle("percentage of those who tried e-cigarette to be addicted to it")+
-  theme_bw()
-```
-
-The figure above shows that 25% of those who are willing to try e-cigarettes turn out to be regular smokers. Tha explaination for this can be multiple: it is possible that in the beginning 1/4 of the triers are determined to be regular smokers. Or it is possible that e-cigarettes can attract 1/4 of the triers. Gender also plays a role in the process. Female are less likely to turn into a regular e-cigarette smoker than males.
 
 
 <iframe src="https://paranoidism.shinyapps.io/e-cigarette/" width=1000 height=800"></iframe>
